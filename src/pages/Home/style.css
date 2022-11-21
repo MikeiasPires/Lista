@@ -2,11 +2,36 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+   
 }
 
-.Container h1{
 
-    margin: 84px 0 24px;
+
+.Container header {
+margin: 84px 0 24px;
+width: 50%;
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.Container h2{
+    margin-bottom: 20px;
+
+}
+
+
+.Container header div {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    }
+    
+
+.Container header img{
+    height: 60px;
+    width: 60px;
+    border-radius: 30px;
+    margin-left: 7px;
 }
 
 .Container input{
@@ -39,3 +64,4 @@
     filter:brightness(0.9)
     
 }
+

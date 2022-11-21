@@ -1,12 +1,14 @@
 import React from 'react'
 import './style.css'
 import { Card } from '../../Components'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export function Home() {
 
   const [studentName, setStudantName] = useState('')
   const [armazen, setArmazen] = useState ([])
+  const [user, setUser] = useState({name:'', avatar:''})
+
 
   function handleAddStudant(){
     
@@ -18,13 +20,35 @@ export function Home() {
     second:"2-digit",
   }) 
   }
-   setArmazen([NewStudant])
+   setArmazen(prevState =>[ ...prevState,NewStudant])
   }
-  console.log(studentName)
   
+
+
+ useEffect(() => {
+   fetch("https://api.github.com/users/Mikeiaspires")
+   .then(response => response.json())
+   .then(data => {
+    setUser({
+      name:data.name,
+      avatar:data.avatar_url,
+    })
+   })
+ },[])
+
+ 
   return (
     <div className='Container'>
+      <header>
       <h1>Lista de presente</h1>
+      <div>
+        <strong>{user.name}</strong>
+        <img src={user.avatar} alt="foto do gostosão " />
+      </div>
+      </header>
+
+      <h2>Alunos</h2>
+
       <input
         type="text"
         placeholder='digite aqui'
@@ -37,7 +61,11 @@ export function Home() {
         Adicionar
       </button>
 
-      { armazen.map( armazenName => <Card name={armazenName.name} time={armazenName.time} />)}
+      { armazen.map( armazenName => 
+      <Card 
+      key={armazenName.time}
+      name={armazenName.name}
+      time={armazenName.time} />)}
 
     </div>
   )
